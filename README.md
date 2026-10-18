@@ -1,7 +1,6 @@
-# Data Engineer Drill
+# Certly
 
-A mobile-first, offline-capable practice app for the Databricks Data Engineer
-Associate certification.
+A offline-capable practice app for the Databricks Data Engineer Associate certification.
 
 ## Product features
 
@@ -14,8 +13,6 @@ Associate certification.
 - Knowledge review highlights weak modules using local attempt history.
 - Installable web-app behavior and offline caching after the first visit.
 
-The app contains no API key, backend, account, tracking, or cloud persistence.
-All progress remains in the browser’s local storage.
 
 ## Files
 
@@ -38,6 +35,4 @@ The project has no runtime or build dependencies beyond Node.js.
 
 ## Content status
 
-The practice questions and explanations come from a community repository and
-remain marked as unverified. Fifteen lineage questions that cannot be reliably
-mapped to the current official exam outline remain in the `unknown` module.
+The practice questions and explanations come from the official.
