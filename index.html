@@ -9,7 +9,7 @@
   <meta property="og:description" content="Focused practice, clear explanations, and ChatGPT follow-up for the Databricks Data Engineer Associate exam.">
   <meta property="og:image" content="./og.png">
   <link rel="manifest" href="./manifest.webmanifest">
-  <title>Data Engineer Drill</title>
+  <title>Certly</title>
   <style>
     :root {
       --ink: #10231e;
@@ -682,22 +682,6 @@
         <section class="module-list">${moduleResults.map(moduleCard).join("")}</section>`;
       document.getElementById("review-all").onclick = () => startRound("mistakes", "all");
       document.querySelectorAll("[data-module]").forEach((button) => button.onclick = () => startRound("normal", button.dataset.module));
-    }
-
-    function renderSettings() {
-      document.getElementById("app").innerHTML = `<section class="page-heading"><p class="eyebrow">Settings</p><h1 style="font-size:40px">Study your way.</h1><p>No account, analytics, or cloud sync. Your progress stays in this browser.</p></section>
-        <section class="card settings-card"><div class="settings-row"><div><h3>Question bank</h3><p>1,008 English questions · 7 official modules · 15 unmapped legacy questions.</p></div><span class="source-pill">Loaded</span></div></section>
-        <section class="card settings-card"><div class="settings-row"><div><h3>ChatGPT follow-up</h3><p>Copies the full question context, then opens ChatGPT. No API key or backend is used.</p></div><span class="source-pill">Ready</span></div></section>
-        <section class="card settings-card"><div class="settings-row"><div><h3>Offline access</h3><p>The practice app and question bank are cached after the first successful visit.</p></div><span class="source-pill">PWA</span></div></section>
-        <section class="card settings-card"><div class="settings-row"><div><h3>Reset study progress</h3><p>Deletes attempts, mistake history, and explanation reports from this device.</p></div><button class="btn btn-danger" id="reset-progress">Reset</button></div></section>
-        <div class="data-note"><strong>Content note:</strong> Questions and explanations come from a community repository and remain unverified. Use “Ask ChatGPT” to challenge an answer, then report explanations that need correction.</div>`;
-      document.getElementById("reset-progress").onclick = () => {
-        if (!confirm("Reset all study progress on this device? This cannot be undone.")) return;
-        state = defaultState();
-        saveState();
-        showToast("Study progress reset.");
-        renderSettings();
-      };
     }
 
     document.getElementById("bottom-nav").addEventListener("click", (event) => {
