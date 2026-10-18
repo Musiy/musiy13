@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10231e">
+  <meta name="description" content="Mobile practice for the Databricks Data Engineer Associate certification.">
+  <meta property="og:title" content="Data Engineer Drill">
+  <meta property="og:description" content="Focused practice, clear explanations, and ChatGPT follow-up for the Databricks Data Engineer Associate exam.">
+  <meta property="og:image" content="./og.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <title>Data Engineer Drill</title>
+  <style>
+    :root {
+      --ink: #10231e;
+      --ink-soft: #40514b;
+      --paper: #f4f1e8;
+      --surface: #fffef8;
+      --line: #d9d7cc;
+      --lime: #c8f169;
+      --lime-dark: #89aa34;
+      --mint: #dff5df;
+      --coral: #ff7657;
+      --coral-soft: #ffe2da;
+      --blue: #d8eaff;
+      --muted: #777d76;
+      --shadow: 0 16px 46px rgba(16, 35, 30, 0.1);
+      --radius: 22px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, select { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, select:focus-visible {
+      outline: 3px solid rgba(16, 35, 30, .35);
+      outline-offset: 3px;
+    }
+    .app-shell { min-height: 100dvh; padding-bottom: calc(94px + var(--safe-bottom)); }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      padding: 12px 18px;
+      background: rgba(244, 241, 232, .94);
+      border-bottom: 1px solid rgba(16, 35, 30, .08);
+      backdrop-filter: blur(18px);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--ink);
+      color: var(--lime);
+      font-weight: 900;
+      letter-spacing: -1px;
+      transform: rotate(-3deg);
+    }
+    .brand-name { font-size: 15px; font-weight: 850; letter-spacing: -.25px; }
+    .brand-sub { margin-top: 1px; color: var(--muted); font-size: 11px; font-weight: 650; }
+    .local-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 750;
+      background: var(--surface);
+    }
+    .local-dot { width: 7px; height: 7px; border-radius: 50%; background: #5fbd68; }
+    main { width: min(100%, 760px); margin: 0 auto; padding: 22px 16px 32px; }
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--ink-soft);
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 10px; font-size: clamp(34px, 9vw, 54px); line-height: .98; letter-spacing: -2.4px; }
+    h2 { margin-bottom: 8px; font-size: 25px; line-height: 1.08; letter-spacing: -1px; }
+    h3 { margin-bottom: 6px; font-size: 17px; letter-spacing: -.3px; }
+    .lead { max-width: 540px; color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+    .hero { position: relative; padding: 12px 3px 19px; overflow: hidden; }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      right: -52px;
+      width: 150px;
+      height: 150px;
+      border: 24px solid rgba(200, 241, 105, .45);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 13px 0 20px;
+    }
+    .stat {
+      min-width: 0;
+      padding: 14px 12px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: rgba(255, 254, 248, .72);
+    }
+    .stat strong { display: block; font-size: 22px; line-height: 1; letter-spacing: -.8px; }
+    .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; font-weight: 750; text-transform: uppercase; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 1px 0 rgba(16,35,30,.03);
+    }
+    .launch-card { padding: 18px; background: var(--ink); color: white; box-shadow: var(--shadow); }
+    .launch-top { display: flex; justify-content: space-between; gap: 16px; }
+    .round-badge {
+      align-self: flex-start;
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 850;
+    }
+    .launch-card p { color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.45; }
+    .field-label { display: block; margin: 14px 0 7px; color: rgba(255,255,255,.66); font-size: 11px; font-weight: 800; }
+    .select-wrap { position: relative; }
+    select {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 42px 0 14px;
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 14px;
+      background: #1c342d;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .select-wrap::after { content: "↓"; position: absolute; right: 16px; top: 15px; color: var(--lime); pointer-events: none; }
+    .btn {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: 850;
+      transition: transform .16s ease, filter .16s ease, background .16s ease;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn:disabled { cursor: not-allowed; opacity: .48; }
+    .btn-primary { width: 100%; margin-top: 10px; background: var(--lime); color: var(--ink); }
+    .btn-dark { background: var(--ink); color: white; }
+    .btn-light { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+    .btn-ghost { background: transparent; color: var(--ink-soft); }
+    .btn-danger { background: var(--coral-soft); color: #8b2b19; }
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 25px; }
+    .action-card {
+      min-height: 122px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--surface);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .action-card .icon { display: grid; width: 34px; height: 34px; margin-bottom: 15px; place-items: center; border-radius: 11px; background: var(--blue); font-weight: 900; }
+    .action-card:nth-child(2) .icon { background: var(--coral-soft); }
+    .action-card strong { display: block; font-size: 14px; }
+    .action-card small { display: block; margin-top: 5px; color: var(--muted); line-height: 1.35; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin: 26px 2px 12px; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 12px; }
+    .module-list { display: grid; gap: 9px; }
+    .module-card {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      min-height: 76px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--surface);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .module-num { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; background: var(--paper); font-size: 13px; font-weight: 900; }
+    .module-copy strong { display: block; font-size: 13px; line-height: 1.25; }
+    .module-copy small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .mini-progress { height: 4px; margin-top: 8px; overflow: hidden; border-radius: 99px; background: #e8e7df; }
+    .mini-progress i { display: block; height: 100%; border-radius: inherit; background: var(--lime-dark); }
+    .module-arrow { color: var(--muted); font-size: 18px; }
+    .bottom-nav {
+      position: fixed;
+      z-index: 30;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 7px 14px calc(7px + var(--safe-bottom));
+      border-top: 1px solid rgba(16,35,30,.12);
+      background: rgba(255,254,248,.96);
+      backdrop-filter: blur(20px);
+    }
+    .nav-btn { min-height: 55px; border: 0; border-radius: 13px; background: transparent; color: var(--muted); cursor: pointer; font-size: 10px; font-weight: 800; }
+    .nav-btn span { display: block; margin-bottom: 3px; font-size: 19px; }
+    .nav-btn.active { background: var(--mint); color: var(--ink); }
+    .loading { display: grid; min-height: 65dvh; place-items: center; text-align: center; }
+    .loader { width: 46px; height: 46px; margin: 0 auto 18px; border: 5px solid #dfded5; border-top-color: var(--ink); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .quiz-top { display: flex; align-items: center; gap: 12px; margin: -5px 0 19px; }
+    .icon-btn { display: grid; width: 48px; height: 48px; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); cursor: pointer; font-size: 20px; }
+    .quiz-progress-wrap { flex: 1; }
+    .quiz-meta { display: flex; justify-content: space-between; margin-bottom: 7px; color: var(--muted); font-size: 11px; font-weight: 750; }
+    .quiz-progress { height: 7px; overflow: hidden; border-radius: 99px; background: #dfddd4; }
+    .quiz-progress i { display: block; height: 100%; border-radius: inherit; background: var(--ink); transition: width .3s ease; }
+    .question-card { padding: 19px; }
+    .question-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+    .tag { padding: 6px 9px; border-radius: 999px; background: var(--mint); color: #345c3a; font-size: 10px; font-weight: 850; }
+    .tag-unmapped { background: #eceae1; color: #686b65; }
+    .question-text { font-size: 18px; font-weight: 740; line-height: 1.48; letter-spacing: -.2px; }
+    .rich-copy { margin-bottom: 10px; white-space: pre-wrap; }
+    .rich-copy:last-child { margin-bottom: 0; }
+    pre { max-width: 100%; margin: 13px 0; padding: 15px; overflow-x: auto; border-radius: 14px; background: #13231f; color: #efffd1; font-size: 12px; line-height: 1.55; white-space: pre; }
+    code { padding: 2px 5px; border-radius: 5px; background: #eceae2; font-family: "SFMono-Regular", Consolas, monospace; font-size: .88em; }
+    pre code { padding: 0; background: transparent; color: inherit; font-size: inherit; }
+    .options { display: grid; gap: 10px; margin-top: 14px; }
+    .option {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      align-items: start;
+      gap: 11px;
+      width: 100%;
+      min-height: 58px;
+      padding: 12px;
+      border: 1.5px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+    .option:hover { border-color: #a8aaa3; }
+    .option-letter { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 11px; background: var(--paper); font-size: 12px; font-weight: 900; }
+    .option-copy { padding-top: 7px; font-size: 13px; line-height: 1.45; }
+    .option.correct { border-color: #67aa62; background: #eef9e9; }
+    .option.correct .option-letter { background: #67aa62; color: white; }
+    .option.wrong { border-color: var(--coral); background: var(--coral-soft); }
+    .option.wrong .option-letter { background: var(--coral); color: white; }
+    .option.dimmed { opacity: .58; }
+    .result-card { margin-top: 14px; padding: 18px; border-radius: 20px; }
+    .result-card.is-correct { border: 1px solid #9ecb8c; background: #eef9e9; }
+    .result-card.is-wrong { border: 1px solid #f3a18d; background: #fff0eb; }
+    .result-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 900; }
+    .result-title i { display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: var(--ink); color: white; font-style: normal; }
+    .result-card p { margin: 8px 0 0; color: var(--ink-soft); font-size: 13px; }
+    .explanation { margin-top: 12px; padding: 19px; }
+    .explanation-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+    .source-pill { padding: 5px 8px; border-radius: 999px; background: #eceae1; color: var(--muted); font-size: 9px; font-weight: 850; text-transform: uppercase; }
+    .explanation-body { color: var(--ink-soft); font-size: 13px; line-height: 1.6; }
+    .quiz-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+    .quiz-actions .btn { width: 100%; font-size: 13px; }
+    .quiz-actions .next-btn { grid-column: 1 / -1; background: var(--ink); color: white; }
+    .chat-btn { background: var(--lime); color: var(--ink); }
+    .summary-card { padding: 24px 20px; text-align: center; }
+    .score-ring {
+      display: grid;
+      width: 142px;
+      height: 142px;
+      margin: 10px auto 20px;
+      place-items: center;
+      border-radius: 50%;
+      background: conic-gradient(var(--lime-dark) var(--score), #e6e5dd 0);
+    }
+    .score-inner { display: grid; width: 108px; height: 108px; place-items: center; border-radius: 50%; background: var(--surface); }
+    .score-inner strong { display: block; font-size: 31px; letter-spacing: -1px; }
+    .score-inner span { color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+    .summary-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 18px 0; text-align: left; }
+    .summary-stat { padding: 15px; border-radius: 15px; background: var(--paper); }
+    .summary-stat strong { display: block; font-size: 22px; }
+    .summary-stat span { color: var(--muted); font-size: 11px; }
+    .page-heading { padding: 9px 2px 12px; }
+    .page-heading p { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+    .insight-card { display: flex; align-items: center; gap: 15px; padding: 17px; margin-bottom: 10px; }
+    .insight-icon { display: grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; border-radius: 14px; background: var(--mint); font-weight: 900; }
+    .insight-card p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .insight-card .btn { min-height: 42px; margin-left: auto; padding: 8px 12px; font-size: 11px; }
+    .settings-card { padding: 18px; margin-bottom: 11px; }
+    .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .settings-row p { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+    .data-note { margin-top: 16px; padding: 15px; border-left: 4px solid var(--lime-dark); border-radius: 10px; background: #eceadf; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
+    .toast {
+      position: fixed;
+      z-index: 80;
+      left: 50%;
+      bottom: calc(92px + var(--safe-bottom));
+      width: max-content;
+      max-width: calc(100% - 32px);
+      padding: 12px 16px;
+      transform: translate(-50%, 20px);
+      border-radius: 13px;
+      background: var(--ink);
+      color: white;
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      font-weight: 750;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .empty { padding: 30px 20px; text-align: center; }
+    .empty-mark { display: grid; width: 62px; height: 62px; margin: 0 auto 15px; place-items: center; border-radius: 20px; background: var(--mint); font-size: 26px; }
+    .error-panel { padding: 25px; border: 1px solid #efa58f; border-radius: 20px; background: var(--coral-soft); }
+    @media (min-width: 680px) {
+      main { padding-top: 35px; }
+      .hero { padding-right: 170px; }
+      .launch-card { padding: 25px; }
+      .module-list { grid-template-columns: 1fr 1fr; }
+      .question-card { padding: 26px; }
+      .question-text { font-size: 20px; }
+      .bottom-nav { left: 50%; right: auto; width: 440px; transform: translateX(-50%); bottom: 12px; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">DE</div>
+        <div><div class="brand-name">Data Engineer Drill</div><div class="brand-sub">Associate certification</div></div>
+      </div>
+      <div class="local-pill"><i class="local-dot"></i> On-device</div>
+    </header>
+    <main id="app" aria-live="polite">
+      <div class="loading"><div><div class="loader"></div><strong>Loading your question bank…</strong><p class="lead">Preparing 1,008 practice questions.</p></div></div>
+    </main>
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Primary navigation" hidden>
+      <button class="nav-btn active" data-view="home"><span>⌂</span>Home</button>
+      <button class="nav-btn" data-view="review"><span>◎</span>Review</button>
+      <button class="nav-btn" data-view="settings"><span>⚙</span>Settings</button>
+    </nav>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "de-drill:v1";
+    const ROUND_SIZE = 5;
+    const MODULES = [
+      { id: "databricks_intelligence_platform", number: "01", name: "Databricks Intelligence Platform", weight: "6%" },
+      { id: "data_ingestion_and_loading", number: "02", name: "Data Ingestion and Loading", weight: "21%" },
+      { id: "data_transformation_and_modeling", number: "03", name: "Data Transformation and Modeling", weight: "22%" },
+      { id: "working_with_lakeflow_jobs", number: "04", name: "Working with Lakeflow Jobs", weight: "16%" },
+      { id: "implementing_ci_cd", number: "05", name: "Implementing CI/CD", weight: "10%" },
+      { id: "troubleshooting_monitoring_and_optimization", number: "06", name: "Troubleshooting, Monitoring, and Optimization", weight: "10%" },
+      { id: "governance_and_security", number: "07", name: "Governance and Security", weight: "15%" },
+      { id: "unknown", number: "—", name: "Unmapped / legacy topics", weight: "Review" },
+    ];
+
+    let questions = [];
+    let questionMap = new Map();
+    let currentView = "home";
+    let toastTimer;
+    let state = loadState();
+
+    function defaultState() {
+      return { stats: {}, mistakes: {}, flagged: [], round: null };
+    }
+
+    function loadState() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return parsed && typeof parsed === "object" ? { ...defaultState(), ...parsed } : defaultState();
+      } catch (_) { return defaultState(); }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[char]);
+    }
+
+    function inlineCode(value) {
+      return escapeHtml(value).replace(/`([^`\n]+)`/g, "<code>$1</code>").replace(/\n/g, "<br>");
+    }
+
+    function richText(value) {
+      return String(value).split("```").map((part, index) => {
+        if (index % 2 === 0) return part ? `<div class="rich-copy">${inlineCode(part)}</div>` : "";
+        const lines = part.replace(/^\n/, "").split("\n");
+        if (lines[0] && /^[a-zA-Z0-9_+-]{1,15}$/.test(lines[0].trim())) lines.shift();
+        return `<pre><code>${escapeHtml(lines.join("\n").trim())}</code></pre>`;
+      }).join("");
+    }
+
+    function moduleInfo(id) { return MODULES.find((module) => module.id === id) || MODULES[7]; }
+    function shuffle(items) {
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+    }
+
+    function aggregate(list = questions) {
+      const ids = new Set(list.map((question) => question.id));
+      let answered = 0, attempts = 0, correct = 0;
+      Object.entries(state.stats).forEach(([id, item]) => {
+        if (!ids.has(id)) return;
+        answered += 1;
+        attempts += item.attempts || 0;
+        correct += item.correct || 0;
+      });
+      return { answered, attempts, correct, accuracy: attempts ? Math.round(correct / attempts * 100) : 0 };
+    }
+
+    function renderNav() {
+      const nav = document.getElementById("bottom-nav");
+      nav.hidden = currentView === "quiz" || currentView === "summary";
+      nav.querySelectorAll(".nav-btn").forEach((button) => button.classList.toggle("active", button.dataset.view === currentView));
+    }
+
+    function setView(view) {
+      currentView = view;
+      renderNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (view === "home") renderHome();
+      if (view === "review") renderReview();
+      if (view === "settings") renderSettings();
+    }
+
+    function moduleCard(module) {
+      const list = questions.filter((question) => question.module === module.id);
+      const result = aggregate(list);
+      const progress = list.length ? Math.round(result.answered / list.length * 100) : 0;
+      return `<button class="module-card" data-module="${module.id}" aria-label="Practice ${escapeHtml(module.name)}">
+        <span class="module-num">${module.number}</span>
+        <span class="module-copy"><strong>${escapeHtml(module.name)}</strong><small>${list.length} questions · ${module.weight} exam weight${result.attempts ? ` · ${result.accuracy}% accuracy` : ""}</small><span class="mini-progress"><i style="width:${progress}%"></i></span></span>
+        <span class="module-arrow">›</span>
+      </button>`;
+    }
+
+    function renderHome() {
+      const result = aggregate();
+      const mistakeCount = Object.keys(state.mistakes).length;
+      const activeRound = state.round && !state.round.complete && state.round.index < state.round.ids.length;
+      document.getElementById("app").innerHTML = `
+        <section class="hero">
+          <p class="eyebrow">Databricks Data Engineer Associate</p>
+          <h1>Build recall.<br>Pass with confidence.</h1>
+          <p class="lead">Focused five-question drills, detailed answer reviews, and one-tap ChatGPT follow-up.</p>
+        </section>
+        <section class="stats-strip" aria-label="Study progress">
+          <div class="stat"><strong>${result.answered}</strong><span>Seen</span></div>
+          <div class="stat"><strong>${result.accuracy}%</strong><span>Accuracy</span></div>
+          <div class="stat"><strong>${mistakeCount}</strong><span>To review</span></div>
+        </section>
+        <section class="card launch-card">
+          <div class="launch-top"><div><p class="eyebrow" style="color:var(--lime)">Quick drill</p><h2>Five questions.<br>One clear goal.</h2></div><span class="round-badge">~ 6 min</span></div>
+          <p>Unseen questions are prioritized. Every answer is saved instantly on this device.</p>
+          <label class="field-label" for="module-select">Choose a focus area</label>
+          <div class="select-wrap"><select id="module-select"><option value="all">All official modules</option>${MODULES.map((module) => `<option value="${module.id}">${escapeHtml(module.name)}</option>`).join("")}</select></div>
+          <button class="btn btn-primary" id="start-round">Start a new round <span>→</span></button>
+          ${activeRound ? `<button class="btn" id="continue-round" style="width:100%;margin-top:8px;background:rgba(255,255,255,.12);color:white">Continue current round</button>` : ""}
+        </section>
+        <section class="action-grid">
+          <button class="action-card" id="knowledge-review"><span class="icon">◎</span><strong>Knowledge review</strong><small>Practice your weakest official module.</small></button>
+          <button class="action-card" id="mistakes-review"><span class="icon">!</span><strong>Review mistakes</strong><small>${mistakeCount ? `${mistakeCount} questions waiting` : "Your mistake list is clear"}.</small></button>
+        </section>
+        <div class="section-head"><div><p class="eyebrow">Exam blueprint</p><h2>Study by module</h2></div><p>1,008 questions</p></div>
+        <section class="module-list">${MODULES.map(moduleCard).join("")}</section>`;
+
+      document.getElementById("start-round").onclick = () => startRound("normal", document.getElementById("module-select").value);
+      if (activeRound) document.getElementById("continue-round").onclick = renderQuiz;
+      document.getElementById("mistakes-review").onclick = () => startRound("mistakes", "all");
+      document.getElementById("knowledge-review").onclick = () => {
+        const weakest = weakestModule();
+        startRound("normal", weakest ? weakest.id : "all");
+      };
+      document.querySelectorAll("[data-module]").forEach((button) => button.onclick = () => startRound("normal", button.dataset.module));
+    }
+
+    function weakestModule() {
+      const attempted = MODULES.filter((module) => module.id !== "unknown").map((module) => {
+        const result = aggregate(questions.filter((question) => question.module === module.id));
+        return { ...module, ...result };
+      }).filter((module) => module.attempts > 0).sort((a, b) => a.accuracy - b.accuracy);
+      return attempted[0] || MODULES.find((module) => module.id === "data_transformation_and_modeling");
+    }
+
+    function startRound(mode, module) {
+      let pool = mode === "mistakes"
+        ? Object.keys(state.mistakes).map((id) => questionMap.get(id)).filter(Boolean)
+        : questions.filter((question) => module === "all" || question.module === module);
+      if (!pool.length) {
+        showToast(mode === "mistakes" ? "Your mistake list is clear." : "No questions are available for this module.");
+        return;
+      }
+      const unseen = shuffle(pool.filter((question) => !state.stats[question.id]));
+      const seen = shuffle(pool.filter((question) => state.stats[question.id]));
+      const selected = [...unseen, ...seen].slice(0, ROUND_SIZE);
+      state.round = { ids: selected.map((question) => question.id), index: 0, answers: [], mode, module, startedAt: Date.now(), complete: false };
+      saveState();
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const round = state.round;
+      if (!round || !round.ids.length) { setView("home"); return; }
+      if (round.index >= round.ids.length) { renderSummary(); return; }
+      currentView = "quiz";
+      renderNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const question = questionMap.get(round.ids[round.index]);
+      if (!question) { round.index += 1; saveState(); renderQuiz(); return; }
+      const record = round.answers[round.index];
+      const module = moduleInfo(question.module);
+      const letters = question.options.map((_, index) => String.fromCharCode(65 + index));
+      const optionHtml = question.options.map((option, index) => {
+        const letter = letters[index];
+        let status = "";
+        if (record) {
+          if (letter === question.answer) status = "correct";
+          else if (letter === record.selected) status = "wrong";
+          else status = "dimmed";
+        }
+        return `<button class="option ${status}" data-answer="${letter}" ${record ? "disabled" : ""}><span class="option-letter">${letter}</span><div class="option-copy">${richText(option)}</div></button>`;
+      }).join("");
+      const isFlagged = state.flagged.includes(question.id);
+      document.getElementById("app").innerHTML = `
+        <div class="quiz-top"><button class="icon-btn" id="exit-quiz" aria-label="Return home">←</button><div class="quiz-progress-wrap"><div class="quiz-meta"><span>Question ${round.index + 1} of ${round.ids.length}</span><span>${round.mode === "mistakes" ? "Mistake review" : "Quick drill"}</span></div><div class="quiz-progress"><i style="width:${((round.index + 1) / round.ids.length) * 100}%"></i></div></div></div>
+        <section class="card question-card">
+          <div class="question-tags"><span class="tag ${question.mapping_status === "unmapped" ? "tag-unmapped" : ""}">${escapeHtml(module.name)}</span>${question.source.tags.slice(0, 1).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>
+          <div class="question-text">${richText(question.question)}</div>
+        </section>
+        <section class="options" aria-label="Answer options">${optionHtml}</section>
+        ${record ? answerReview(question, record, isFlagged) : ""}`;
+
+      document.getElementById("exit-quiz").onclick = () => setView("home");
+      if (!record) document.querySelectorAll("[data-answer]").forEach((button) => button.onclick = () => answerQuestion(button.dataset.answer));
+      if (record) {
+        document.getElementById("ask-chatgpt").onclick = () => askChatGPT(question, record);
+        document.getElementById("flag-explanation").onclick = () => toggleFlag(question.id);
+        document.getElementById("next-question").onclick = nextQuestion;
+      }
+    }
+
+    function answerReview(question, record, isFlagged) {
+      return `<section class="result-card ${record.correct ? "is-correct" : "is-wrong"}"><div class="result-title"><i>${record.correct ? "✓" : "×"}</i>${record.correct ? "Correct" : "Not quite"}</div><p>${record.correct ? "Strong work. Review the explanation to lock in the concept." : `The correct answer is ${question.answer}. Add the concept to your recall loop.`}</p></section>
+        <section class="card explanation"><div class="explanation-head"><h3>Answer explanation</h3><span class="source-pill">Community source</span></div><div class="explanation-body">${richText(question.explanation)}</div></section>
+        <section class="quiz-actions"><button class="btn chat-btn" id="ask-chatgpt">✦ Ask ChatGPT</button><button class="btn btn-light" id="flag-explanation">${isFlagged ? "✓ Issue reported" : "Report explanation issue"}</button><button class="btn next-btn" id="next-question">${state.round.index === state.round.ids.length - 1 ? "See round results" : "Next question →"}</button></section>`;
+    }
+
+    function answerQuestion(selected) {
+      const round = state.round;
+      const question = questionMap.get(round.ids[round.index]);
+      if (!question || round.answers[round.index]) return;
+      const correct = selected === question.answer;
+      const previous = state.stats[question.id] || { attempts: 0, correct: 0 };
+      state.stats[question.id] = { attempts: previous.attempts + 1, correct: previous.correct + (correct ? 1 : 0), lastAnswer: selected, lastAt: Date.now() };
+
+      if (!correct) state.mistakes[question.id] = { streak: 0, addedAt: state.mistakes[question.id]?.addedAt || Date.now() };
+      if (correct && round.mode === "mistakes" && state.mistakes[question.id]) {
+        const streak = (state.mistakes[question.id].streak || 0) + 1;
+        if (streak >= 2) delete state.mistakes[question.id];
+        else state.mistakes[question.id].streak = streak;
+      }
+      round.answers[round.index] = { selected, correct, answeredAt: Date.now() };
+      saveState();
+      renderQuiz();
+    }
+
+    function nextQuestion() {
+      state.round.index += 1;
+      saveState();
+      if (state.round.index >= state.round.ids.length) renderSummary();
+      else renderQuiz();
+    }
+
+    function toggleFlag(id) {
+      state.flagged = state.flagged.includes(id) ? state.flagged.filter((item) => item !== id) : [...state.flagged, id];
+      saveState();
+      showToast(state.flagged.includes(id) ? "Explanation issue saved on this device." : "Explanation issue removed.");
+      renderQuiz();
+    }
+
+    function buildChatPrompt(question, record) {
+      const module = moduleInfo(question.module);
+      const options = question.options.map((option, index) => `${String.fromCharCode(65 + index)}. ${option}`).join("\n");
+      return `I'm studying for the Databricks Certified Data Engineer Associate exam.\n\nOfficial module: ${module.name}\n\nQuestion:\n${question.question}\n\nOptions:\n${options}\n\nMy answer: ${record.selected}\nQuestion bank answer: ${question.answer}\n\nExisting explanation:\n${question.explanation}\n\nPlease act as a concise certification tutor and help me review this knowledge point:\n1. Explain the core concept in plain English.\n2. Verify whether the question bank answer is correct. If it is disputed, say so clearly.\n3. Explain why each option is right or wrong.\n4. Give me one short memory aid and one new practice question.\n\nKeep the response concise and mobile-friendly.`;
+    }
+
+    function fallbackCopy(text) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+
+    function askChatGPT(question, record) {
+      const prompt = buildChatPrompt(question, record);
+      fallbackCopy(prompt);
+      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(prompt).catch(() => {});
+      showToast("Study prompt copied. Opening ChatGPT…");
+      const opened = window.open("https://chatgpt.com/", "_blank");
+      if (opened) opened.opener = null;
+      if (!opened) setTimeout(() => { window.location.href = "https://chatgpt.com/"; }, 350);
+    }
+
+    function renderSummary() {
+      const round = state.round;
+      if (!round) { setView("home"); return; }
+      round.complete = true;
+      saveState();
+      currentView = "summary";
+      renderNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      const correct = round.answers.filter((answer) => answer?.correct).length;
+      const wrong = round.answers.length - correct;
+      const percent = round.answers.length ? Math.round(correct / round.answers.length * 100) : 0;
+      const title = percent === 100 ? "Clean sweep." : percent >= 60 ? "Good momentum." : "A useful baseline.";
+      document.getElementById("app").innerHTML = `<section class="card summary-card"><p class="eyebrow">Round complete</p><h1 style="font-size:39px">${title}</h1><p class="lead" style="margin-left:auto;margin-right:auto">Every result is saved. Revisit missed concepts while they are still fresh.</p><div class="score-ring" style="--score:${percent * 3.6}deg"><div class="score-inner"><div><strong>${percent}%</strong><span>Accuracy</span></div></div></div><div class="summary-stats"><div class="summary-stat"><strong>${correct}</strong><span>Correct answers</span></div><div class="summary-stat"><strong>${wrong}</strong><span>Added to review</span></div></div><button class="btn btn-dark" id="summary-home" style="width:100%">Back to dashboard</button><button class="btn btn-light" id="summary-again" style="width:100%;margin-top:9px">Start another round</button></section>`;
+      document.getElementById("summary-home").onclick = () => { state.round = null; saveState(); setView("home"); };
+      document.getElementById("summary-again").onclick = () => { const { mode, module } = round; state.round = null; saveState(); startRound(mode, module); };
+    }
+
+    function renderReview() {
+      const mistakeCount = Object.keys(state.mistakes).length;
+      const moduleResults = MODULES.filter((module) => module.id !== "unknown").map((module) => ({ ...module, ...aggregate(questions.filter((question) => question.module === module.id)) })).sort((a, b) => (a.attempts ? a.accuracy : 101) - (b.attempts ? b.accuracy : 101));
+      document.getElementById("app").innerHTML = `<section class="page-heading"><p class="eyebrow">Knowledge review</p><h1 style="font-size:40px">Turn misses into recall.</h1><p>Your weakest areas rise to the top. Two correct answers in mistake mode clears a question.</p></section>
+        <section class="card insight-card"><span class="insight-icon">!</span><div><strong>${mistakeCount} questions to revisit</strong><p>Target the concepts that cost you points.</p></div><button class="btn btn-dark" id="review-all" ${mistakeCount ? "" : "disabled"}>Start</button></section>
+        <section class="card insight-card"><span class="insight-icon">⚑</span><div><strong>${state.flagged.length} explanation issues</strong><p>Stored locally for later review or correction.</p></div></section>
+        <div class="section-head"><div><p class="eyebrow">Performance</p><h2>Module health</h2></div></div>
+        <section class="module-list">${moduleResults.map(moduleCard).join("")}</section>`;
+      document.getElementById("review-all").onclick = () => startRound("mistakes", "all");
+      document.querySelectorAll("[data-module]").forEach((button) => button.onclick = () => startRound("normal", button.dataset.module));
+    }
+
+    function renderSettings() {
+      document.getElementById("app").innerHTML = `<section class="page-heading"><p class="eyebrow">Settings</p><h1 style="font-size:40px">Study your way.</h1><p>No account, analytics, or cloud sync. Your progress stays in this browser.</p></section>
+        <section class="card settings-card"><div class="settings-row"><div><h3>Question bank</h3><p>1,008 English questions · 7 official modules · 15 unmapped legacy questions.</p></div><span class="source-pill">Loaded</span></div></section>
+        <section class="card settings-card"><div class="settings-row"><div><h3>ChatGPT follow-up</h3><p>Copies the full question context, then opens ChatGPT. No API key or backend is used.</p></div><span class="source-pill">Ready</span></div></section>
+        <section class="card settings-card"><div class="settings-row"><div><h3>Offline access</h3><p>The practice app and question bank are cached after the first successful visit.</p></div><span class="source-pill">PWA</span></div></section>
+        <section class="card settings-card"><div class="settings-row"><div><h3>Reset study progress</h3><p>Deletes attempts, mistake history, and explanation reports from this device.</p></div><button class="btn btn-danger" id="reset-progress">Reset</button></div></section>
+        <div class="data-note"><strong>Content note:</strong> Questions and explanations come from a community repository and remain unverified. Use “Ask ChatGPT” to challenge an answer, then report explanations that need correction.</div>`;
+      document.getElementById("reset-progress").onclick = () => {
+        if (!confirm("Reset all study progress on this device? This cannot be undone.")) return;
+        state = defaultState();
+        saveState();
+        showToast("Study progress reset.");
+        renderSettings();
+      };
+    }
+
+    document.getElementById("bottom-nav").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-view]");
+      if (button) setView(button.dataset.view);
+    });
+
+    async function init() {
+      try {
+        const response = await fetch("./questions.json");
+        if (!response.ok) throw new Error(`Question bank request failed (${response.status})`);
+        questions = await response.json();
+        questionMap = new Map(questions.map((question) => [question.id, question]));
+        document.getElementById("bottom-nav").hidden = false;
+        renderHome();
+        if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      } catch (error) {
+        document.getElementById("app").innerHTML = `<section class="error-panel"><h2>Question bank unavailable</h2><p>${escapeHtml(error.message)}</p><p>Serve this folder from a local or hosted web server rather than opening the HTML file directly.</p></section>`;
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
