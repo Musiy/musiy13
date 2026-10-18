@@ -1,4 +1,4 @@
-const CACHE = "certly-v3";
+const CACHE = "certly-v4";
 const CORE = ["./", "./index.html", "./questions.json", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {

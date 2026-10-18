@@ -44,7 +44,7 @@
       outline: 3px solid rgba(16, 35, 30, .35);
       outline-offset: 3px;
     }
-    .app-shell { min-height: 100dvh; padding-bottom: calc(94px + var(--safe-bottom)); }
+    .app-shell { min-height: 100dvh; padding-bottom: calc(78px + var(--safe-bottom)); }
     .topbar {
       position: sticky;
       top: 0;
@@ -100,33 +100,24 @@
     h2 { margin-bottom: 8px; font-size: 25px; line-height: 1.08; letter-spacing: -1px; }
     h3 { margin-bottom: 6px; font-size: 17px; letter-spacing: -.3px; }
     .lead { max-width: 540px; color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
-    .hero { position: relative; padding: 12px 3px 19px; overflow: hidden; }
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 4px;
-      right: -52px;
-      width: 150px;
-      height: 150px;
-      border: 24px solid rgba(200, 241, 105, .45);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+    .cert-line { margin: 2px 2px 14px; color: var(--ink-soft); font-size: 12px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
     .stats-strip {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin: 13px 0 20px;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 0 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 254, 248, .72);
     }
     .stat {
       min-width: 0;
-      padding: 14px 12px;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      background: rgba(255, 254, 248, .72);
+      padding: 12px;
+      border-right: 1px solid var(--line);
     }
-    .stat strong { display: block; font-size: 22px; line-height: 1; letter-spacing: -.8px; }
-    .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; font-weight: 750; text-transform: uppercase; }
+    .stat:last-child { border-right: 0; }
+    .stat strong { display: block; font-size: 20px; line-height: 1; letter-spacing: -.7px; }
+    .stat span { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 800; text-transform: uppercase; }
     .card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -134,7 +125,7 @@
       box-shadow: 0 1px 0 rgba(16,35,30,.03);
     }
     .launch-card { padding: 18px; background: var(--ink); color: white; box-shadow: var(--shadow); }
-    .launch-top { display: flex; justify-content: space-between; gap: 16px; }
+    .launch-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
     .round-badge {
       align-self: flex-start;
       flex: 0 0 auto;
@@ -145,8 +136,8 @@
       font-size: 11px;
       font-weight: 850;
     }
-    .launch-card p { color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.45; }
-    .field-label { display: block; margin: 14px 0 7px; color: rgba(255,255,255,.66); font-size: 11px; font-weight: 800; }
+    .launch-card .eyebrow { margin-bottom: 0; }
+    .field-label { display: block; margin: 13px 0 7px; color: rgba(255,255,255,.66); font-size: 11px; font-weight: 800; }
     .select-wrap { position: relative; }
     select {
       width: 100%;
@@ -177,6 +168,7 @@
     .btn:active { transform: scale(.98); }
     .btn:disabled { cursor: not-allowed; opacity: .48; }
     .btn-primary { width: 100%; margin-top: 10px; background: var(--lime); color: var(--ink); }
+    .btn-continue { width: 100%; margin-top: 8px; background: rgba(255,255,255,.12); color: white; }
     .btn-dark { background: var(--ink); color: white; }
     .btn-light { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
     .btn-ghost { background: transparent; color: var(--ink-soft); }
@@ -195,46 +187,24 @@
     .action-card:nth-child(2) .icon { background: var(--coral-soft); }
     .action-card strong { display: block; font-size: 14px; }
     .action-card small { display: block; margin-top: 5px; color: var(--muted); line-height: 1.35; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 14px; margin: 26px 2px 12px; }
-    .section-head p { margin: 0; color: var(--muted); font-size: 12px; }
-    .module-list { display: grid; gap: 9px; }
-    .module-card {
-      display: grid;
-      grid-template-columns: 42px 1fr auto;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      min-height: 76px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      background: var(--surface);
-      color: var(--ink);
-      text-align: left;
-      cursor: pointer;
-    }
-    .module-num { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 13px; background: var(--paper); font-size: 13px; font-weight: 900; }
-    .module-copy strong { display: block; font-size: 13px; line-height: 1.25; }
-    .module-copy small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
-    .mini-progress { height: 4px; margin-top: 8px; overflow: hidden; border-radius: 99px; background: #e8e7df; }
-    .mini-progress i { display: block; height: 100%; border-radius: inherit; background: var(--lime-dark); }
-    .module-arrow { color: var(--muted); font-size: 18px; }
     .bottom-nav {
       position: fixed;
       z-index: 30;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: calc(8px + var(--safe-bottom));
+      left: 12px;
+      right: 12px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      padding: 7px 14px calc(7px + var(--safe-bottom));
-      border-top: 1px solid rgba(16,35,30,.12);
+      grid-template-columns: repeat(2, 1fr);
+      padding: 4px;
+      border: 1px solid rgba(16,35,30,.12);
+      border-radius: 18px;
       background: rgba(255,254,248,.96);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(20px);
     }
     .bottom-nav[hidden] { display: none !important; }
-    .nav-btn { min-height: 55px; border: 0; border-radius: 13px; background: transparent; color: var(--muted); cursor: pointer; font-size: 10px; font-weight: 800; }
-    .nav-btn span { display: block; margin-bottom: 3px; font-size: 19px; }
+    .nav-btn { min-height: 48px; border: 0; border-radius: 14px; background: transparent; color: var(--muted); cursor: pointer; font-size: 10px; font-weight: 800; }
+    .nav-btn span { display: block; margin-bottom: 1px; font-size: 17px; }
     .nav-btn.active { background: var(--mint); color: var(--ink); }
     .loading { display: grid; min-height: 65dvh; place-items: center; text-align: center; }
     .loader { width: 46px; height: 46px; margin: 0 auto 18px; border: 5px solid #dfded5; border-top-color: var(--ink); border-radius: 50%; animation: spin .8s linear infinite; }
@@ -316,11 +286,25 @@
     .insight-icon { display: grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; border-radius: 14px; background: var(--mint); font-weight: 900; }
     .insight-card p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
     .insight-card .btn { min-height: 42px; margin-left: auto; padding: 8px 12px; font-size: 11px; }
+    .accuracy-panel { margin-top: 12px; padding: 18px; }
+    .accuracy-panel h2 { margin-bottom: 0; }
+    .accuracy-layout { display: grid; gap: 18px; align-items: center; margin-top: 12px; }
+    .accuracy-chart-wrap { display: grid; width: min(100%, 268px); margin: 0 auto; place-items: center; }
+    .accuracy-chart { width: 100%; height: auto; overflow: visible; }
+    .accuracy-track, .accuracy-ring { fill: none; stroke-width: 8; }
+    .accuracy-track { stroke: #e9e7de; }
+    .accuracy-ring { stroke: var(--ring-color); stroke-linecap: round; }
+    .accuracy-center-title { fill: var(--muted); font-size: 10px; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .accuracy-legend { display: grid; gap: 8px; }
+    .legend-item { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 9px; min-height: 28px; }
+    .legend-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ring-color); }
+    .legend-item strong { font-size: 12px; line-height: 1.25; }
+    .legend-item span:last-child { color: var(--ink-soft); font-size: 12px; font-weight: 850; }
     .toast {
       position: fixed;
       z-index: 80;
       left: 50%;
-      bottom: calc(92px + var(--safe-bottom));
+      bottom: calc(74px + var(--safe-bottom));
       width: max-content;
       max-width: calc(100% - 32px);
       padding: 12px 16px;
@@ -341,12 +325,11 @@
     .error-panel { padding: 25px; border: 1px solid #efa58f; border-radius: 20px; background: var(--coral-soft); }
     @media (min-width: 680px) {
       main { padding-top: 35px; }
-      .hero { padding-right: 170px; }
       .launch-card { padding: 25px; }
-      .module-list { grid-template-columns: 1fr 1fr; }
+      .accuracy-layout { grid-template-columns: 280px 1fr; gap: 28px; }
       .question-card { padding: 26px; }
       .question-text { font-size: 20px; }
-      .bottom-nav { left: 50%; right: auto; width: 440px; transform: translateX(-50%); bottom: 12px; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); }
+      .bottom-nav { left: 50%; right: auto; width: 340px; transform: translateX(-50%); }
     }
     @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
   </style>
@@ -382,6 +365,7 @@
       { id: "troubleshooting_monitoring_and_optimization", number: "06", name: "Troubleshooting, Monitoring, and Optimization", weight: "10%" },
       { id: "governance_and_security", number: "07", name: "Governance and Security", weight: "15%" },
     ];
+    const MODULE_COLORS = ["#89aa34", "#4f8f83", "#5c78b8", "#8a68a8", "#d08054", "#bb5868", "#4f7553"];
 
     let questions = [];
     let questionMap = new Map();
@@ -465,46 +449,28 @@
       if (view === "review") renderReview();
     }
 
-    function moduleCard(module) {
-      const list = questions.filter((question) => question.module === module.id);
-      const result = aggregate(list);
-      const progress = list.length ? Math.round(result.answered / list.length * 100) : 0;
-      return `<button class="module-card" data-module="${module.id}" aria-label="Practice ${escapeHtml(module.name)}">
-        <span class="module-num">${module.number}</span>
-        <span class="module-copy"><strong>${escapeHtml(module.name)}</strong><small>${list.length} questions · ${module.weight} exam weight${result.attempts ? ` · ${result.accuracy}% accuracy` : ""}</small><span class="mini-progress"><i style="width:${progress}%"></i></span></span>
-        <span class="module-arrow">›</span>
-      </button>`;
-    }
-
     function renderHome() {
       const result = aggregate();
       const mistakeCount = Object.keys(state.mistakes).length;
       const activeRound = state.round && !state.round.complete && state.round.index < state.round.ids.length;
       document.getElementById("app").innerHTML = `
-        <section class="hero">
-          <p class="eyebrow">Databricks Data Engineer Associate</p>
-          <h1>Build recall.<br>Pass with confidence.</h1>
-          <p class="lead">Focused five-question drills, detailed answer reviews, and one-tap ChatGPT follow-up.</p>
-        </section>
+        <p class="cert-line">Databricks Data Engineer Associate Certification</p>
         <section class="stats-strip" aria-label="Study progress">
           <div class="stat"><strong>${result.answered}</strong><span>Seen</span></div>
           <div class="stat"><strong>${result.accuracy}%</strong><span>Accuracy</span></div>
           <div class="stat"><strong>${mistakeCount}</strong><span>To review</span></div>
         </section>
         <section class="card launch-card">
-          <div class="launch-top"><div><p class="eyebrow" style="color:var(--lime)">Quick drill</p><h2>Five questions.<br>One clear goal.</h2></div><span class="round-badge">~ 6 min</span></div>
-          <p>Unseen questions are prioritized. Every answer is saved instantly on this device.</p>
+          <div class="launch-top"><p class="eyebrow" style="color:var(--lime)">Quick drill</p><span class="round-badge">~ 6 min</span></div>
           <label class="field-label" for="module-select">Choose a focus area</label>
           <div class="select-wrap"><select id="module-select"><option value="all">All official modules</option>${MODULES.map((module) => `<option value="${module.id}">${escapeHtml(module.name)}</option>`).join("")}</select></div>
           <button class="btn btn-primary" id="start-round">Start a new round <span>→</span></button>
-          ${activeRound ? `<button class="btn" id="continue-round" style="width:100%;margin-top:8px;background:rgba(255,255,255,.12);color:white">Continue current round</button>` : ""}
+          <button class="btn btn-continue" id="continue-round" ${activeRound ? "" : "disabled"}>Continue current round</button>
         </section>
         <section class="action-grid">
           <button class="action-card" id="knowledge-review"><span class="icon">◎</span><strong>Knowledge review</strong><small>Practice your weakest official module.</small></button>
           <button class="action-card" id="mistakes-review"><span class="icon">!</span><strong>Review mistakes</strong><small>${mistakeCount ? `${mistakeCount} questions waiting` : "Your mistake list is clear"}.</small></button>
-        </section>
-        <div class="section-head"><div><p class="eyebrow">Exam blueprint</p><h2>Study by module</h2></div><p>1,008 questions</p></div>
-        <section class="module-list">${MODULES.map(moduleCard).join("")}</section>`;
+        </section>`;
 
       document.getElementById("start-round").onclick = () => startRound("normal", document.getElementById("module-select").value);
       if (activeRound) document.getElementById("continue-round").onclick = renderQuiz;
@@ -513,7 +479,6 @@
         const weakest = weakestModule();
         startRound("normal", weakest ? weakest.id : "all");
       };
-      document.querySelectorAll("[data-module]").forEach((button) => button.onclick = () => startRound("normal", button.dataset.module));
     }
 
     function weakestModule() {
@@ -666,14 +631,23 @@
 
     function renderReview() {
       const mistakeCount = Object.keys(state.mistakes).length;
-      const moduleResults = MODULES.map((module) => ({ ...module, ...aggregate(questions.filter((question) => question.module === module.id)) })).sort((a, b) => (a.attempts ? a.accuracy : 101) - (b.attempts ? b.accuracy : 101));
-      document.getElementById("app").innerHTML = `<section class="page-heading"><p class="eyebrow">Knowledge review</p><h1 style="font-size:40px">Turn misses into recall.</h1><p>Your weakest areas rise to the top. Two correct answers in mistake mode clears a question.</p></section>
-        <section class="card insight-card"><span class="insight-icon">!</span><div><strong>${mistakeCount} questions to revisit</strong><p>Target the concepts that cost you points.</p></div><button class="btn btn-dark" id="review-all" ${mistakeCount ? "" : "disabled"}>Start</button></section>
+      const moduleResults = MODULES.map((module) => ({ ...module, ...aggregate(questions.filter((question) => question.module === module.id)) }));
+      const rings = moduleResults.map((module, index) => {
+        const radius = 104 - index * 13;
+        const value = module.attempts ? module.accuracy : 0;
+        return `<circle class="accuracy-track" cx="120" cy="120" r="${radius}" pathLength="100"></circle><circle class="accuracy-ring" cx="120" cy="120" r="${radius}" pathLength="100" stroke-dasharray="${value} 100" transform="rotate(-90 120 120)" style="--ring-color:${MODULE_COLORS[index]}"></circle>`;
+      }).join("");
+      const legend = moduleResults.map((module, index) => `<div class="legend-item" style="--ring-color:${MODULE_COLORS[index]}"><span class="legend-dot"></span><strong>${escapeHtml(module.name)}</strong><span>${module.attempts ? `${module.accuracy}%` : "—"}</span></div>`).join("");
+      document.getElementById("app").innerHTML = `<section class="card insight-card"><span class="insight-icon">!</span><div><strong>${mistakeCount} questions to revisit</strong><p>Two correct reviews clears a question.</p></div><button class="btn btn-dark" id="review-all" ${mistakeCount ? "" : "disabled"}>Start</button></section>
         <section class="card insight-card"><span class="insight-icon">⚑</span><div><strong>${state.flagged.length} explanation issues</strong><p>Stored locally for later review or correction.</p></div></section>
-        <div class="section-head"><div><p class="eyebrow">Performance</p><h2>Module health</h2></div></div>
-        <section class="module-list">${moduleResults.map(moduleCard).join("")}</section>`;
+        <section class="card accuracy-panel" aria-labelledby="module-accuracy-title">
+          <p class="eyebrow">Performance</p><h2 id="module-accuracy-title">Module accuracy</h2>
+          <div class="accuracy-layout">
+            <div class="accuracy-chart-wrap"><svg class="accuracy-chart" viewBox="0 0 240 240" role="img" aria-labelledby="module-accuracy-title module-accuracy-desc"><desc id="module-accuracy-desc">Seven rings show accuracy for each official exam module.</desc>${rings}<text class="accuracy-center-title" x="120" y="124" text-anchor="middle">Accuracy</text></svg></div>
+            <div class="accuracy-legend" aria-label="Module accuracy legend">${legend}</div>
+          </div>
+        </section>`;
       document.getElementById("review-all").onclick = () => startRound("mistakes", "all");
-      document.querySelectorAll("[data-module]").forEach((button) => button.onclick = () => startRound("normal", button.dataset.module));
     }
 
     document.getElementById("bottom-nav").addEventListener("click", (event) => {
