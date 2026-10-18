@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#10231e">
   <meta name="description" content="Mobile practice for the Databricks Data Engineer Associate certification.">
-  <meta property="og:title" content="Data Engineer Drill">
+  <meta property="og:title" content="Certly">
   <meta property="og:description" content="Focused practice, clear explanations, and ChatGPT follow-up for the Databricks Data Engineer Associate exam.">
   <meta property="og:image" content="./og.png">
   <link rel="manifest" href="./manifest.webmanifest">
@@ -114,7 +114,7 @@
     }
     .stats-strip {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin: 13px 0 20px;
     }
@@ -180,7 +180,6 @@
     .btn-dark { background: var(--ink); color: white; }
     .btn-light { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
     .btn-ghost { background: transparent; color: var(--ink-soft); }
-    .btn-danger { background: var(--coral-soft); color: #8b2b19; }
     .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 25px; }
     .action-card {
       min-height: 122px;
@@ -317,10 +316,6 @@
     .insight-icon { display: grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; border-radius: 14px; background: var(--mint); font-weight: 900; }
     .insight-card p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
     .insight-card .btn { min-height: 42px; margin-left: auto; padding: 8px 12px; font-size: 11px; }
-    .settings-card { padding: 18px; margin-bottom: 11px; }
-    .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .settings-row p { margin: 4px 0 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
-    .data-note { margin-top: 16px; padding: 15px; border-left: 4px solid var(--lime-dark); border-radius: 10px; background: #eceadf; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
     .toast {
       position: fixed;
       z-index: 80;
@@ -360,8 +355,8 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark">DE</div>
-        <div><div class="brand-name">Data Engineer Drill</div><div class="brand-sub">Associate certification</div></div>
+        <div class="brand-mark">C</div>
+        <div><div class="brand-name">Certly</div><div class="brand-sub">Associate certification</div></div>
       </div>
       <div class="local-pill"><i class="local-dot"></i> On-device</div>
     </header>
@@ -371,7 +366,6 @@
     <nav class="bottom-nav" id="bottom-nav" aria-label="Primary navigation" hidden>
       <button class="nav-btn active" data-view="home"><span>⌂</span>Home</button>
       <button class="nav-btn" data-view="review"><span>◎</span>Review</button>
-      <button class="nav-btn" data-view="settings"><span>⚙</span>Settings</button>
     </nav>
     <div class="toast" id="toast" role="status"></div>
   </div>
@@ -387,7 +381,6 @@
       { id: "implementing_ci_cd", number: "05", name: "Implementing CI/CD", weight: "10%" },
       { id: "troubleshooting_monitoring_and_optimization", number: "06", name: "Troubleshooting, Monitoring, and Optimization", weight: "10%" },
       { id: "governance_and_security", number: "07", name: "Governance and Security", weight: "15%" },
-      { id: "unknown", number: "—", name: "Unmapped / legacy topics", weight: "Review" },
     ];
 
     let questions = [];
@@ -428,7 +421,7 @@
       }).join("");
     }
 
-    function moduleInfo(id) { return MODULES.find((module) => module.id === id) || MODULES[7]; }
+    function moduleInfo(id) { return MODULES.find((module) => module.id === id) || MODULES[0]; }
     function shuffle(items) {
       const copy = [...items];
       for (let i = copy.length - 1; i > 0; i--) {
@@ -470,7 +463,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (view === "home") renderHome();
       if (view === "review") renderReview();
-      if (view === "settings") renderSettings();
     }
 
     function moduleCard(module) {
@@ -525,7 +517,7 @@
     }
 
     function weakestModule() {
-      const attempted = MODULES.filter((module) => module.id !== "unknown").map((module) => {
+      const attempted = MODULES.map((module) => {
         const result = aggregate(questions.filter((question) => question.module === module.id));
         return { ...module, ...result };
       }).filter((module) => module.attempts > 0).sort((a, b) => a.accuracy - b.accuracy);
@@ -674,7 +666,7 @@
 
     function renderReview() {
       const mistakeCount = Object.keys(state.mistakes).length;
-      const moduleResults = MODULES.filter((module) => module.id !== "unknown").map((module) => ({ ...module, ...aggregate(questions.filter((question) => question.module === module.id)) })).sort((a, b) => (a.attempts ? a.accuracy : 101) - (b.attempts ? b.accuracy : 101));
+      const moduleResults = MODULES.map((module) => ({ ...module, ...aggregate(questions.filter((question) => question.module === module.id)) })).sort((a, b) => (a.attempts ? a.accuracy : 101) - (b.attempts ? b.accuracy : 101));
       document.getElementById("app").innerHTML = `<section class="page-heading"><p class="eyebrow">Knowledge review</p><h1 style="font-size:40px">Turn misses into recall.</h1><p>Your weakest areas rise to the top. Two correct answers in mistake mode clears a question.</p></section>
         <section class="card insight-card"><span class="insight-icon">!</span><div><strong>${mistakeCount} questions to revisit</strong><p>Target the concepts that cost you points.</p></div><button class="btn btn-dark" id="review-all" ${mistakeCount ? "" : "disabled"}>Start</button></section>
         <section class="card insight-card"><span class="insight-icon">⚑</span><div><strong>${state.flagged.length} explanation issues</strong><p>Stored locally for later review or correction.</p></div></section>

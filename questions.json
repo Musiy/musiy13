@@ -29121,9 +29121,9 @@
   {
     "id": "dea-0c4288098d1a88c2",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer wants to identify all downstream tables, jobs, and dashboards that depend on a table before deleting it.\n\nWhich Unity Catalog feature should be used?",
     "options": [
       "Table history (DESCRIBE HISTORY)",
@@ -29150,9 +29150,9 @@
   {
     "id": "dea-4da2b59736efd872",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer needs to view lineage for a table in Catalog Explorer but receives an error that no lineage information is available, even though queries have run against it recently.\n\nWhich requirement is most likely missing?",
     "options": [
       "The cluster must be running Databricks Runtime 7.3 LTS",
@@ -29179,9 +29179,9 @@
   {
     "id": "dea-489e36acddf8daa6",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A user has only `SELECT` on a table `finance.sales.orders` but no `BROWSE` privilege on the `finance` catalog.\n\nWhat happens when they view the lineage graph involving this table?",
     "options": [
       "The table appears fully expanded with all downstream nodes visible",
@@ -29208,9 +29208,9 @@
   {
     "id": "dea-d6ff186ac0c6d858",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer runs the following query:\n\n```sql\nCREATE OR REPLACE TABLE car_features\nAS SELECT *, in1 + in2 AS premium_feature_set\nFROM car_features_exterior\nJOIN car_features_interior\nUSING (id, model);\n```\n\nWhich statement about the resulting column lineage is correct?",
     "options": [
       "Column lineage will only be captured at the table level, not per column",
@@ -29237,9 +29237,9 @@
   {
     "id": "dea-f0be84744d8e2cbd",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "Which of the following scenarios will NOT be captured in Unity Catalog column-level lineage?",
     "options": [
       "A column produced by a JOIN between two UC tables",
@@ -29266,9 +29266,9 @@
   {
     "id": "dea-d04a9502eeb36e43",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer wants to ask, in natural language, \"What tables depend on revenue_fact?\" directly inside Catalog Explorer without writing SQL against system tables.\n\nWhich feature should they use?",
     "options": [
       "The Databricks SQL Editor's autocomplete feature",
@@ -29295,9 +29295,9 @@
   {
     "id": "dea-75d12c28daa7d81c",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer wants to programmatically find all tables that have read from `main.finance.revenue_raw` in the last 90 days.\n\nWhich approach should they use?",
     "options": [
       "Run `DESCRIBE HISTORY main.finance.revenue_raw`",
@@ -29324,9 +29324,9 @@
   {
     "id": "dea-4deea7d2f7ffdcee",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "In `system.access.table_lineage`, a row has `source_table_full_name` populated but `target_table_full_name` is NULL.\n\nWhat type of event does this row represent?",
     "options": [
       "A read-only event",
@@ -29353,9 +29353,9 @@
   {
     "id": "dea-d2f718eb4c7aa716",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A team runs `INSERT INTO sales_summary VALUES (101, 'East', 4500)` to load a record.\n\nWhat will be true of the corresponding row in `system.access.column_lineage`?",
     "options": [
       "The entire transaction will fail validation",
@@ -29382,9 +29382,9 @@
   {
     "id": "dea-669b3ee681395ed4",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A company ingests data from Salesforce into a Unity Catalog table using a custom notebook (not Lakeflow Connect), and the data is later consumed by a Tableau dashboard.\n\nWhich statement about capturing this end-to-end lineage is correct?",
     "options": [
       "Unity Catalog automatically detects Salesforce and Tableau without any configuration",
@@ -29411,9 +29411,9 @@
   {
     "id": "dea-c1269831e409a2c3",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A data engineer wants to create a downstream lineage relationship from a Unity Catalog table to a newly registered external metadata object representing a Power BI report.\n\nWhich privilege is required on the source UC table to do this?",
     "options": [
       "CREATE EXTERNAL METADATA",
@@ -29440,9 +29440,9 @@
   {
     "id": "dea-d3f5cc534a5165e2",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "An auditor needs to query historical lineage events that occurred 14 months ago for a compliance review.\n\nWhich limitation applies if they try to query `system.access.table_lineage`?",
     "options": [
       "The records will be missing because system tables only retain 30 days of history",
@@ -29469,9 +29469,9 @@
   {
     "id": "dea-27c317d0a1d7b27d",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "Which of the following accurately describes lineage data retention in Catalog Explorer versus the Lineage system tables?",
     "options": [
       "Catalog Explorer retains 1 year, while system tables retain lineage indefinitely",
@@ -29498,9 +29498,9 @@
   {
     "id": "dea-f795e66a13780c61",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A schema named `sales_data` is renamed to `sales_data_v2`, and several downstream jobs continue reading from the renamed schema.\n\nWhat happens to the previously captured lineage for tables in this schema?",
     "options": [
       "The lineage is not preserved across the rename and historical lineage links are broken",
@@ -29527,9 +29527,9 @@
   {
     "id": "dea-d5f39c2ff2f1fb7f",
     "cert": "databricks_data_engineer_associate",
-    "module": "unknown",
+    "module": "governance_and_security",
     "mapping_status": "unmapped",
-    "mapping_basis": "The source topic is Unity Catalog lineage, which is not an explicit objective in the official exam guide effective 2026-05-04.",
+    "mapping_basis": "Grouped under Governance and Security for study organization by user preference; Unity Catalog lineage is not an explicit objective in the official exam guide effective 2026-05-04.",
     "question": "A job runs using `databricks jobs runs submit` (rather than a scheduled job definition) to execute a notebook that writes to a Unity Catalog table.\n\nWhich statement about the resulting lineage is correct?",
     "options": [
       "Lineage capture fails and the job run is rolled back",
