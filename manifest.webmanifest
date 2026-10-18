@@ -1,6 +1,6 @@
 {
   "name": "Certly",
-  "short_name": "DE Drill",
+  "short_name": "Certly",
   "description": "Mobile practice for the Databricks Data Engineer Associate certification.",
   "start_url": "./",
   "display": "standalone",
